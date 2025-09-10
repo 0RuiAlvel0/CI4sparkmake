@@ -1,0 +1,43 @@
+#!/bin/bash
+# Save this as spark-make and make it executable: chmod +x spark-make
+
+TYPE="$1"
+NAME="$2"
+
+if [ -z "$TYPE" ] || [ -z "$NAME" ]; then
+    echo "Usage: spark-make [controller|model|seeder|migration|command] Name"
+    exit 1
+fi
+
+php spark make:$TYPE "$NAME"
+
+# Convert first letter to uppercase for filename
+FILE_NAME="$(tr '[:lower:]' '[:upper:]' <<< ${NAME:0:1})${NAME:1}.php"
+
+case "$TYPE" in
+    seeder)
+        FILE="app/Database/Seeds/$FILE_NAME"
+        ;;
+    migration)
+        # Find the migration file (timestamp prefix)
+        FILE=$(ls app/Database/Migrations/*"${FILE_NAME}" 2>/dev/null | head -n 1)
+        ;;
+    model)
+        FILE="app/Models/$FILE_NAME"
+        ;;
+    controller)
+        FILE="app/Controllers/$FILE_NAME"
+        ;;
+    command)
+	FILE="app/Commands/$FILE_NAME"
+	;;
+    *)
+        FILE=""
+        ;;
+esac
+
+if [ -n "$FILE" ] && [ -f "$FILE" ]; then
+    code "$FILE"
+else
+    echo "File $FILE not found."
+fi
