@@ -9,6 +9,11 @@ This script wraps around CodeIgniter's `php spark make:` commands to:
 - Automatically locate the generated file
 - Open it directly in VS Code for immediate editing
 
+This works when the code base is on a remote server and you are using an extension such as ssh-remote to work on it on your local machine. This is the only test that has been made, so I know it works. There is no reason why it wouldn't work if the code is local too.
+
+If you can please confirm that:
+1. This indeed works when the code is local.
+
 ## 📦 Installation
 
 1. **Download or clone this repository**:
