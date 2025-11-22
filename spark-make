@@ -5,7 +5,7 @@ TYPE="$1"
 NAME="$2"
 
 if [ -z "$TYPE" ] || [ -z "$NAME" ]; then
-    echo "Usage: spark-make [controller|model|seeder|migration|command] Name"
+    echo "Usage: spark-make [controller|model|seeder|migration|command|filter] Name"
     exit 1
 fi
 
@@ -28,9 +28,12 @@ case "$TYPE" in
     controller)
         FILE="app/Controllers/$FILE_NAME"
         ;;
+    filter)
+        FILE="app/Filters/$FILE_NAME"
+        ;;
     command)
-	FILE="app/Commands/$FILE_NAME"
-	;;
+        FILE="app/Commands/$FILE_NAME"
+        ;;
     *)
         FILE=""
         ;;

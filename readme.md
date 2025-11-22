@@ -5,14 +5,11 @@ A simple Bash utility to speed up development in [CodeIgniter 4](https://codeign
 ## 🚀 What It Does
 
 This script wraps around CodeIgniter's `php spark make:` commands to:
-- Create a new **controller**, **model**, **seeder**, **migration**, or **command**
+- Create a new **controller**, **model**, **seeder**, **migration**, **filter** or **command**
 - Automatically locate the generated file
 - Open it directly in VS Code for immediate editing
 
-This works when the code base is on a remote server and you are using an extension such as ssh-remote to work on it on your local machine. This is the only test that has been made, so I know it works. There is no reason why it wouldn't work if the code is local too.
-
-If you can please confirm that:
-1. This indeed works when the code is local.
+This works when the code base is on a remote server and you are using an extension such as ssh-remote to work on it on your local machine. This is the only test that has been made, so I know it works. There is no reason why it wouldn't work if the code is local too (can someone please confirm that?).
 
 ## 📦 Installation
 
@@ -51,10 +48,11 @@ spark-make [type] [Name]
 - `seeder`
 - `migration`
 - `command`
+- `filter`
 
 ### Example:
 ```bash
-spark-make controller User
+spark-make controller UserController
 ```
 
 This will:
