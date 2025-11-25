@@ -5,7 +5,7 @@ A simple Bash utility to speed up development in [CodeIgniter 4](https://codeign
 ## 🚀 What It Does
 
 This script wraps around CodeIgniter's `php spark make:` commands to:
-- Create a new **controller**, **model**, **seeder**, **migration**, **filter** or **command**
+- Create a new **controller**, **model**, **seeder**, **migration**, **filter**, **command** or **helper**
 - Automatically locate the generated file
 - Open it directly in VS Code for immediate editing
 
@@ -49,15 +49,23 @@ spark-make [type] [Name]
 - `migration`
 - `command`
 - `filter`
+- `helper` <-- helper file will have _helper appended.
 
 ### Example:
 ```bash
 spark-make controller UserController
 ```
-
 This will:
 - Run `php spark make:controller User`
 - Locate `app/Controllers/User.php`
+- Directly open the file in VS Code after creation
+
+or
+```
+spark-make helper this_is_a
+```
+This will:
+- Create a new file inside app\Helpers with the name `this_is_a_helper.php`
 - Directly open the file in VS Code after creation
 
 ## 🧠 Notes
