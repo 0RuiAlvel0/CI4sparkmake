@@ -70,7 +70,7 @@ This will:
 
 ## 🧠 Notes
 
-- The script capitalizes the first letter of the filename automatically.
+- The script capitalizes the first letter of the filename automatically (except for helpers).
 - For migrations, it searches for the timestamped file that matches the name.
 - If the file is not found, it will notify you.
 
