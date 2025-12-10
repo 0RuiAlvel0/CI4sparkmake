@@ -16,12 +16,15 @@ if [[ ! "$TYPE" =~ ^(controller|model|seeder|migration|command|filter|helper|lib
 fi
 
 # If anything other then helper is requested, use spark make command
-if [[ "$TYPE" != "helper" && "$TYPE" != "library" ]]; then
-    php spark make:$TYPE "$NAME"
+if [[ "$TYPE" != "helper" ]]; then
+    if [[ "$TYPE" != "library" ]]; then
+        php spark make:$TYPE "$NAME"
+    fi
     # Convert first letter to uppercase for filename
     FILE_NAME="$(tr '[:lower:]' '[:upper:]' <<< ${NAME:0:1})${NAME:1}.php"
-else
-    # For helper, just open the file directly
+fi
+if [[ "$TYPE" == "helper" ]]; then
+    # For helper, just open the file directly and append _helper.php
     FILE_NAME="${NAME}_helper.php"
 fi
 
@@ -61,7 +64,7 @@ class $CLASS_NAME
 {
     public function __construct()
     {
-        // Constructor code here
+        // Placeholder constructor
     }
 }
 " > "$FILE"
