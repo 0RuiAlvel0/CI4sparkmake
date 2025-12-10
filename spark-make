@@ -5,18 +5,18 @@ TYPE="$1"
 NAME="$2"
 
 if [ -z "$TYPE" ] || [ -z "$NAME" ]; then
-    echo "Usage: spark-make [controller|model|seeder|migration|command|filter|helper] Name"
+    echo "Usage: spark-make [controller|model|seeder|migration|command|filter|helper|library] Name"
     echo "No need for extension, just the name. For helpers, do not include _helper."
     exit 1
 fi
 
-if [[ ! "$TYPE" =~ ^(controller|model|seeder|migration|command|filter|helper)$ ]]; then
-    echo "Invalid type. Must be one of: controller, model, seeder, migration, command, filter, helper"
+if [[ ! "$TYPE" =~ ^(controller|model|seeder|migration|command|filter|helper|library)$ ]]; then
+    echo "Invalid type. Must be one of: controller, model, seeder, migration, command, filter, helper, library"
     exit 1
 fi
 
 # If anything other then helper is requested, use spark make command
-if [[ "$TYPE" != "helper" ]]; then
+if [[ "$TYPE" != "helper" && "$TYPE" != "library" ]]; then
     php spark make:$TYPE "$NAME"
     # Convert first letter to uppercase for filename
     FILE_NAME="$(tr '[:lower:]' '[:upper:]' <<< ${NAME:0:1})${NAME:1}.php"
@@ -48,6 +48,23 @@ case "$TYPE" in
     helper)
         FILE="app/Helpers/$FILE_NAME"
         touch "$FILE"  # Create the helper file
+        ;;
+    library)
+        FILE="app/Libraries/$FILE_NAME"
+        touch "$FILE"  # Create the library file
+        #Add basic class structure
+        CLASS_NAME="$(tr '[:lower:]' '[:upper:]' <<< ${NAME:0:1})${NAME:1}"
+        echo "<?php 
+namespace App\Libraries;
+
+class $CLASS_NAME
+{
+    public function __construct()
+    {
+        // Constructor code here
+    }
+}
+" > "$FILE"
         ;;
     *)
         FILE=""
