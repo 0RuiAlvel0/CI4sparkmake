@@ -10,8 +10,8 @@ if [ -z "$TYPE" ] || [ -z "$NAME" ]; then
     exit 1
 fi
 
-if [[ ! "$TYPE" =~ ^(controller|model|seeder|migration|command|filter|helper|library)$ ]]; then
-    echo "Invalid type. Must be one of: controller, model, seeder, migration, command, filter, helper, library"
+if [[ ! "$TYPE" =~ ^(controller|model|seeder|migration|command|filter|helper|library|service)$ ]]; then
+    echo "Invalid type. Must be one of: controller, model, seeder, migration, command, filter, helper, library, service"
     exit 1
 fi
 
@@ -51,6 +51,23 @@ case "$TYPE" in
     helper)
         FILE="app/Helpers/$FILE_NAME"
         touch "$FILE"  # Create the helper file
+        ;;
+    service)
+        FILE="app/Services/$FILE_NAME"
+        touch "$FILE"  # Create the library file
+        #Add basic class structure
+        CLASS_NAME="$(tr '[:lower:]' '[:upper:]' <<< ${NAME:0:1})${NAME:1}"
+        echo "<?php 
+namespace App\Services;
+
+class $CLASS_NAME
+{
+    public function __construct()
+    {
+        // Placeholder constructor
+    }
+}
+" > "$FILE"
         ;;
     library)
         FILE="app/Libraries/$FILE_NAME"
