@@ -4,10 +4,13 @@ A simple Bash utility to speed up development in [CodeIgniter 4](https://codeign
 
 ## What It Does
 
+
+
 This script wraps around CodeIgniter's `php spark make:` commands to:
 - Create a new **controller**, **model**, **seeder**, **migration**, **filter**, **command**, **library** (will not use spark make), **service** (will not use spark make), or **helper** (will also not use spark make)
 - Automatically locate the generated file
 - Open it directly in VS Code for immediate editing
+- If you create a service, library, or helper, the script will automatically create the corresponding directory (`app/Services`, `app/Libraries`, or `app/Helpers`) if it does not exist. These directories are not present in a default CodeIgniter 4 install and will be created for you as needed.
 
 This works when the code base is on a remote server and you are using an extension such as ssh-remote to work on it on your local machine. This is the only test that has been made, so I know it works. There is no reason why it wouldn't work if the code is local too (can someone please confirm that?).
 
