@@ -18,10 +18,14 @@ This works when the code base is on a remote server and you are using an extensi
 
 1. **Download or clone this repository**:
    ```bash
-   git clone git@github.com:0RuiAlvel0/CI4sparkmake.git
+   git clone https://github.com/0RuiAlvel0/CI4sparkmake.git
    ```
 
 2. **Make the script executable**:
+Go inside the directory where you cloned the repository:
+   ```bash
+   cd CI4sparkmake
+   ```
    ```bash
    chmod +x spark-make
    ```
@@ -30,6 +34,11 @@ This works when the code base is on a remote server and you are using an extensi
    ```bash
    sudo mv spark-make /usr/local/bin/
    ```
+You will have to set permissions again if you move the script to a directory in your PATH.
+   ```bash
+   chmod +x /usr/local/bin/spark-make
+   ```
+You can now call spark-make from anywhere in your terminal.
 
 ## Usage
 
@@ -61,8 +70,8 @@ spark-make [type] [Name]
 spark-make controller UserController
 ```
 This will:
-- Run `php spark make:controller User`
-- Locate `app/Controllers/User.php`
+- Run `php spark make:controller UserController`
+- Locate `app/Controllers/UserController.php`
 - Directly open the file in VS Code after creation
 
 or
